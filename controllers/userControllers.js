@@ -1,8 +1,9 @@
 const con = require('../database/db_connection');
+
 //add to database
 exports.addTask = (req, res) => {
    const {task} = req.body;
-   if (task == null || task === ''){ 
+   if (task == null || task === '') { 
     res.status(400).send('Please provide a valid input!');
     return;
    }
@@ -18,7 +19,7 @@ exports.addTask = (req, res) => {
    });
 }
 
-
+//get all tasks from the database
 exports.displayList = (req, res) => {
     con.query(`SELECT * FROM task_list`, (err, rows) => {
       if (err) {
