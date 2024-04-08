@@ -1,5 +1,5 @@
 const con = require('../database/db_connection');
-
+//add to database
 exports.addTask = (req, res) => {
    const {task} = req.body;
    if (task == null || task === ''){ 
@@ -17,3 +17,15 @@ exports.addTask = (req, res) => {
     res.redirect('/index');
    });
 }
+
+
+exports.displayList = (req, res) => {
+    con.query(`SELECT * FROM task_list`, (err, rows) => {
+      if (err) {
+        console.error('Error fetching data from MySQL: ', err);
+        res.send('Error fetching users');
+        return;
+      }
+      res.render('index', { items: rows });
+    });
+};
